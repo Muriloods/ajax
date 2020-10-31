@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<title>Hello bastards</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+	</head>
+	<body>
+		<div>
+			<p id = "resultado">Esse é o paragrafo que vai mudar!</p>
+		</div>
+	</body>
+	</html>
+<script>
+
+	let data = {idCidade : "5"}
+
+	// descomentar a linha abaixo para enviar como content type json
+	data = JSON.stringify(data);
+
+	$.ajax({
+		url : "endpoint.php",
+		type : 'post',
+
+		// descomentar a linha abaixo para enviar como content type json
+		contentType: "application/json",
+
+		data : data,
+		beforeSend : function(){
+			$("#resultado").html("ENVIANDO...");
+		}
+	})
+	.done(function(msg){
+		$("#resultado").html(msg);
+	})
+	.fail(function(jqXHR, textStatus, msg){
+		alert(msg);
+	});
+</script>
